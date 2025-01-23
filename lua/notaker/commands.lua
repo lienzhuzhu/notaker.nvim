@@ -12,6 +12,14 @@ local function create_note(args)
 
     local filename = cortex_dir .. "/" .. args.args .. ".md"
 
+    -- Extract the directory path from the filename
+    local dir = vim.fn.fnamemodify(filename, ":h")
+
+    -- Ensure the directory exists, create it if necessary
+    if vim.fn.isdirectory(dir) == 0 then
+        vim.fn.mkdir(dir, "p") -- "p" creates intermediate directories as needed
+    end
+
     vim.cmd("edit " .. vim.fn.fnameescape(filename))
 end
 
