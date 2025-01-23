@@ -5,7 +5,12 @@
 vim.keymap.set("n", "<leader>nn", ":Note ", { noremap = true, silent = false })
 
 -- Fuzzy find in NOTAKER_CORTEX_DIR
-vim.keymap.set("n", "<leader>nf", "<cmd>FzfLua files cwd=$NOTAKER_CORTEX_DIR, glob=**/*.md<CR>", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>nf", function()
+    require('fzf-lua').files({
+        cwd = vim.fn.expand("$NOTAKER_CORTEX_DIR"),
+        fd_opts = "--extension md"
+    })
+end, { noremap = true, silent = false })
 
 local opts = { noremap = true, silent = true }
 
