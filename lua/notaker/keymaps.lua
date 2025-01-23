@@ -2,7 +2,10 @@
 -- Lien Zhu
 
 -- Create a new Note
-vim.keymap.set("n", "<leader>xn", ":Note ", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>nn", ":Note ", { noremap = true, silent = false })
+
+-- Fuzzy find in NOTAKER_CORTEX_DIR
+vim.keymap.set("n", "<leader>nf", "<cmd>FzfLua files cwd=$NOTAKER_CORTEX_DIR, glob=**/*.md<CR>", { noremap = true, silent = false })
 
 local opts = { noremap = true, silent = true }
 
@@ -16,7 +19,7 @@ vim.keymap.set('n', '<leader>ng', function()
     end
 end, opts)
 
--- necrotizing fasciitis
+-- grep cursor, selection in NOTAKER_CORTEX_DIR
 vim.keymap.set('n', '<leader>NG', ":lua vim.cmd('vimgrep /' .. vim.fn.expand('<cword>') .. '/g $NOTAKER_CORTEX_DIR/**/*')<CR>:copen<CR>", opts)
 -- vim.api.nvim_set_keymap('v', '<leader>NG', '"zy:lua vim.cmd(\'vimgrep /\' .. vim.fn.escape(vim.fn.getreg("z"), "/") .. \'/g $NOTAKER_CORTEX_DIR/**/*\')<CR>:copen<CR>', opts)
 vim.keymap.set('v', '<leader>NG', function()
